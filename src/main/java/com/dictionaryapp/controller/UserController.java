@@ -76,6 +76,8 @@ public class UserController {
             return "redirect:/login";
         }
 
+        redirectAttributes.addFlashAttribute("badCredentials", true);
+
         return "redirect:/home";
     }
 

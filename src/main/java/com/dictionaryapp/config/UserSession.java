@@ -29,4 +29,8 @@ public class UserSession {
     public String username() {
         return userName;
     }
+
+    public long id() {
+        return userId;
+    }
 }
