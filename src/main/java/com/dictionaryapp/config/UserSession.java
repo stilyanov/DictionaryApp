@@ -8,7 +8,7 @@ import org.springframework.web.context.annotation.SessionScope;
 @SessionScope
 public class UserSession {
 
-    private Long userId;
+    private long userId;
 
     private String userName;
 
@@ -22,7 +22,7 @@ public class UserSession {
     }
 
     public void logout() {
-        userId = null;
+        userId = 0;
         userName = "";
     }
 
