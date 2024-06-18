@@ -33,4 +33,12 @@ public class LanguageService {
         return true;
     }
 
+    public Language findLanguage(LanguageEnum languageEnum) {
+        return this.languageRepository.findByLanguageEnum(languageEnum).orElseThrow();
+    }
+
+    public Language findStyleByStyleName(LanguageEnum styleName) {
+        return this.languageRepository.findByLanguageEnum(styleName).orElseThrow();
+    }
+
 }

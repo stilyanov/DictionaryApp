@@ -16,7 +16,7 @@ public class Language extends BaseEntity {
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "language")
+    @OneToMany(mappedBy = "language", fetch = FetchType.LAZY)
     private Set<Word> words;
 
     public Language() {

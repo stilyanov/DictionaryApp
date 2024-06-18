@@ -1,8 +1,12 @@
 package com.dictionaryapp.model.dto;
 
+import com.dictionaryapp.model.entity.LanguageEnum;
+import com.dictionaryapp.model.entity.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -10,22 +14,25 @@ public class WordAddDTO {
 
     private Long id;
 
-    @NotBlank
-    @Size(min = 2, max = 40)
+    @NotNull
+    @Size(min = 2, max = 40, message = "The term length must be between 2 and 40 characters!")
     private String term;
 
-    @NotBlank
-    @Size(min = 2, max = 40)
+    @NotNull
+    @Size(min = 2, max = 80, message = "The translation length must be between 2 and 80 characters!")
     private String translation;
 
-    @Size(min = 2, max = 200)
+    @Size(min = 2, max = 200, message = "The example length must be between 2 and 200 characters!")
     private String example;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @PastOrPresent(message = "The input date must be in the past or present!")
     private LocalDate inputDate;
 
-    private LanguageDTO language;
+    @NotNull(message = "You must select a language!")
+    private LanguageEnum language;
 
-    private UserDTO addedBy;
+    private User addedBy;
 
     public WordAddDTO() {}
 
@@ -37,16 +44,16 @@ public class WordAddDTO {
         this.id = id;
     }
 
-    public void setLanguage(LanguageDTO language) {
-        this.language = language;
-    }
-
-    public UserDTO getAddedBy() {
+    public User getAddedBy() {
         return addedBy;
     }
 
-    public void setAddedBy(UserDTO addedBy) {
+    public void setAddedBy(User addedBy) {
         this.addedBy = addedBy;
+    }
+
+    public void setLanguage(LanguageEnum language) {
+        this.language = language;
     }
 
     public String getTerm() {
@@ -81,7 +88,7 @@ public class WordAddDTO {
         this.inputDate = inputDate;
     }
 
-    public LanguageDTO getLanguage() {
+    public LanguageEnum getLanguage() {
         return language;
     }
 }
