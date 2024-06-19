@@ -30,12 +30,12 @@ public class Language extends BaseEntity {
         this.description = description;
     }
 
-    public LanguageEnum getLanguageEnum() {
+    public LanguageEnum getName() {
         return name;
     }
 
-    public void setLanguageEnum(LanguageEnum languageEnum) {
-        this.name = languageEnum;
+    public void setName(LanguageEnum name) {
+        this.name = name;
     }
 
     public String getDescription() {

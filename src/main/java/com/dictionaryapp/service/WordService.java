@@ -3,13 +3,18 @@ package com.dictionaryapp.service;
 import com.dictionaryapp.config.UserSession;
 import com.dictionaryapp.model.dto.WordAddDTO;
 import com.dictionaryapp.model.entity.Language;
+import com.dictionaryapp.model.entity.LanguageEnum;
 import com.dictionaryapp.model.entity.User;
 import com.dictionaryapp.model.entity.Word;
 import com.dictionaryapp.repo.LanguageRepository;
 import com.dictionaryapp.repo.UserRepository;
 import com.dictionaryapp.repo.WordRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -40,6 +45,8 @@ public class WordService {
             return false;
         }
 
+        User user = userId.get();
+
         Optional<Language> byName = languageRepository.findByName(wordAddDTO.getLanguage());
 
         if (byName.isEmpty()) {
@@ -52,10 +59,25 @@ public class WordService {
         word.setExample(wordAddDTO.getExample());
         word.setInputDate(wordAddDTO.getInputDate());
         word.setLanguage(byName.get());
-        word.setAddedBy(userId.get());
+        word.setAddedBy(user);
 
         wordRepository.save(word);
 
         return true;
+    }
+
+    @Transactional
+    public Map<LanguageEnum, List<Word>> findAllByLanguage() {
+        Map<LanguageEnum, List<Word>> result = new HashMap<>();
+
+        List<Language> allLanguages = languageRepository.findAll();
+
+        for (Language language : allLanguages) {
+            List<Word> words = wordRepository.findAllByLanguage(language);
+
+            result.put(language.getName(), words);
+        }
+
+        return result;
     }
 }

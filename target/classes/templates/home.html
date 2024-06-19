@@ -11,27 +11,31 @@
         <div class="row mt-3 mb-3">
 
             <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
-                <h3 class="mySticky bg-gray text-dark rounded">German: {germanWordsCount}</h3>
-                    <div class="mt-3 rounded badge-warning">
+                <h3 class="mySticky bg-gray text-dark rounded">German: <span th:text="${germansData.size()}"></span></h3>
+                    <div class="mt-3 rounded badge-warning"
+                         th:each="german : ${germansData}"
+                    >
                         <img class="mr-2" src="/img/german.png" alt="Flag" width="20px" height="20px">
-                        <span>{germanTerm}: {translation}</span>
+                        <span th:text="${german.getTerm()}">{germanTerm}</span>: <span th:text="${german.getTranslation()}">{translation}</span>
                         <br>
-                        <span>Example: {example}</span>
+                        <span>Example: <span th:text="${german.getExample()}">{example}</span></span>
                         <br>
-                        <span>Added by: {username} on {inputDate}</span>
+                        <span>Added by: <span th:text="${@userSession.username()}">{username}</span> on <span th:text="${german.getInputDate()}">{inputDate}</span></span>
                         <a class="ml-3 text-danger" href="/">Remove</a>
                     </div>
             </div>
 
             <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
-                <h3 class="mySticky bg-gray text-dark rounded">Spanish: {spanishWordsCount}</h3>
-                    <div class="mt-3 rounded badge-secondary">
+                <h3 class="mySticky bg-gray text-dark rounded">Spanish: <span th:text="${spanishData.size()}"></span></h3>
+                    <div class="mt-3 rounded badge-secondary"
+                         th:each="spanish : ${spanishData}"
+                    >
                         <img class="mr-2" src="/img/spanish.png" alt="Flag" width="20px" height="20px">
-                        <span>{spanishTerm}: {translation}</span>
+                        <span th:text="${spanish.getTerm()}">{spanishTerm}</span>: <span th:text="${spanish.getTranslation()}">{translation}</span>
                         <br>
-                        <span>Example: {example}</span>
+                        <span>Example: <span th:text="${spanish.getExample()}">{example}</span></span>
                         <br>
-                        <span>Added by: {username} on {inputDate}</span>
+                        <span>Added by: <span th:text="${spanish.}">{username}</span> on <span th:text="${spanish.getInputDate()}">{inputDate}</span></span>
                         <a class="ml-3 text-danger" href="/">Remove</a>
                     </div>
             </div>
@@ -39,27 +43,31 @@
 
         <div class="row mt-3 mb-3">
             <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
-                <h3 class="mySticky bg-gray text-dark rounded">French: {frenchWordsCount}</h3>
-                    <div class="mt-3 rounded badge-info">
+                <h3 class="mySticky bg-gray text-dark rounded">French: <span th:text="${frenchData.size()}"></span></h3>
+                    <div class="mt-3 rounded badge-info"
+                         th:each="french : ${frenchData}"
+                    >
                         <img class="mr-2" src="/img/french.png" alt="Flag" width="20px" height="20px">
-                        <span>{frenchTerm}: {translation}</span>
+                        <span th:text="${french.getTerm()}">{frenchTerm}</span>: <span th:text="${french.getTranslation()}">{translation}</span>
                         <br>
-                        <span>Example: {example}</span>
+                        <span>Example: <span th:text="${french.getExample()}">{example}</span></span>
                         <br>
-                        <span>Added by: {username} on {inputDate}</span>
+                        <span>Added by: <span th:text="${@userSession.username()}">{username}</span> on <span th:text="${french.getInputDate()}">{inputDate}</span></span>
                         <a class="ml-3 text-danger" href="/">Remove</a>
                     </div>
             </div>
 
             <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
-                <h3 class="mySticky bg-gray text-dark rounded">Italian: {italianWordsCount}</h3>
-                    <div class="mt-3 rounded badge-success">
+                <h3 class="mySticky bg-gray text-dark rounded">Italian: <span th:text="${italiansData.size()}"></span></h3>
+                    <div class="mt-3 rounded badge-success"
+                         th:each="italian : ${italiansData}"
+                    >
                         <img class="mr-2" src="/img/italian.png" alt="Flag" width="20px" height="20px">
-                        <span>{italianTerm}: {translation}</span>
+                        <span th:text="${italian.getTerm()}">{italianTerm}</span>: <span th:text="${italian.getTranslation()}">{translation}</span>
                         <br>
-                        <span>Example: {example}</span>
+                        <span>Example: <span th:text="${italian.getExample()}">{example}</span></span>
                         <br>
-                        <span>Added by: {username} on {inputDate}</span>
+                        <span>Added by: <span th:text="${@userSession.username()}">{username}</span> on <span th:text="${italian.getInputDate()}">{inputDate}</span></span>
                         <a class="ml-3 text-danger" href="/">Remove</a>
                     </div>
             </div>
