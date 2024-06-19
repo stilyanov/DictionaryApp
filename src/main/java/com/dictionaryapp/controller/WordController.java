@@ -3,6 +3,7 @@ package com.dictionaryapp.controller;
 import com.dictionaryapp.config.UserSession;
 import com.dictionaryapp.model.dto.WordAddDTO;
 import com.dictionaryapp.model.entity.LanguageEnum;
+import com.dictionaryapp.repo.WordRepository;
 import com.dictionaryapp.service.WordService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,12 @@ public class WordController {
 
     private final WordService wordService;
     private final UserSession userSession;
+    private final WordRepository wordRepository;
 
-    public WordController(WordService wordService, UserSession userSession) {
+    public WordController(WordService wordService, UserSession userSession, WordRepository wordRepository) {
         this.wordService = wordService;
         this.userSession = userSession;
+        this.wordRepository = wordRepository;
     }
 
     @ModelAttribute("languages")
@@ -35,6 +38,10 @@ public class WordController {
 
     @GetMapping("/words")
     public String viewAddWord() {
+        if (!userSession.isUserLoggedIn()) {
+            return "redirect:/";
+        }
+
         return "word-add";
     }
 
@@ -43,6 +50,10 @@ public class WordController {
                           BindingResult bindingResult,
                           RedirectAttributes redirectAttributes) {
 
+        if (!userSession.isUserLoggedIn()) {
+            return "redirect:/";
+        }
+
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("wordData", wordAddDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.wordData", bindingResult);
@@ -50,15 +61,17 @@ public class WordController {
             return "redirect:/words";
         }
 
-        if (!userSession.isUserLoggedIn()) {
-            return "redirect:/login";
+        boolean success = wordService.create(wordAddDTO);
+
+        if (!success) {
+            redirectAttributes.addFlashAttribute("wordData", wordAddDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.wordData", bindingResult);
+
+            return "redirect:/words";
         }
 
-        long id = userSession.id();
-
-        wordService.addWord(wordAddDTO, id);
-
         return "redirect:/home";
+
     }
 
 }

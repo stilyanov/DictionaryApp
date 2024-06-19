@@ -11,7 +11,7 @@ public class Language extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     @Enumerated(EnumType.STRING)
-    private LanguageEnum languageEnum;
+    private LanguageEnum name;
 
     @Column(nullable = false)
     private String description;
@@ -26,16 +26,16 @@ public class Language extends BaseEntity {
     public Language(LanguageEnum languageEnum, String description) {
         super();
 
-        this.languageEnum = languageEnum;
+        this.name = languageEnum;
         this.description = description;
     }
 
     public LanguageEnum getLanguageEnum() {
-        return languageEnum;
+        return name;
     }
 
     public void setLanguageEnum(LanguageEnum languageEnum) {
-        this.languageEnum = languageEnum;
+        this.name = languageEnum;
     }
 
     public String getDescription() {

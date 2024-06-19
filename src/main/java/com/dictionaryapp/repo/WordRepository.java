@@ -10,8 +10,6 @@ import java.util.List;
 @Repository
 public interface WordRepository extends JpaRepository<Word, Long> {
 
-    List<Word> findAllByAddedByIsNull();
-
     List<Word> findAllByLanguage(Language language);
 
 }
