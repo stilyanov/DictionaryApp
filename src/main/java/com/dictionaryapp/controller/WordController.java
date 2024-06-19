@@ -3,7 +3,6 @@ package com.dictionaryapp.controller;
 import com.dictionaryapp.config.UserSession;
 import com.dictionaryapp.model.dto.WordAddDTO;
 import com.dictionaryapp.model.entity.LanguageEnum;
-import com.dictionaryapp.model.entity.Word;
 import com.dictionaryapp.service.WordService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller

@@ -19,21 +19,24 @@
 
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav row">
-                <li class="nav-item col-md-4" th:unless="${@userSession.isUserLoggedIn()}">
+                <li class="nav-item col-md-4"
+                    th:unless="${@userSession.isUserLoggedIn()}"
+                >
                     <a class="nav-link active h5 my-text-color" th:href="@{/login}">Login</a>
                 </li>
 
-                <li class="nav-item col-md-4" th:unless="${@userSession.isUserLoggedIn()}">
+                <li class="nav-item col-md-4"
+                    th:unless="${@userSession.isUserLoggedIn()}"
+                >
                     <a class="nav-link my-text-color active h5 " th:href="@{/register}">Register</a>
                 </li>
 
                 <a class="nav-link h5 my-text-color"
                    th:if="${@userSession.isUserLoggedIn()}">Welcome, <span th:text="${@userSession.username()}"></span></a>
                 <li class="nav-item col-md-4"
-                    th:if="${@userSession.isUserLoggedIn()}">
-                    <form th:action="@{/logout}" th:method="POST">
-                        <button class="nav-link my-text-color active h5 btn-logout" type="submit">Logout</button>
-                    </form>
+                    th:if="${@userSession.isUserLoggedIn()}"
+                >
+                    <a class="nav-link h5 my-text-color" th:href="@{/logout}">Logout</a>
                 </li>
             </ul>
         </div>

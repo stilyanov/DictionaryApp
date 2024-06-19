@@ -23,7 +23,7 @@ public class UserSession {
 
     public void logout() {
         userId = 0;
-        userName = "";
+        userName = null;
     }
 
     public String username() {

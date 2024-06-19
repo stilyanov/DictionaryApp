@@ -4,7 +4,6 @@ import com.dictionaryapp.config.UserSession;
 import com.dictionaryapp.service.UserService;
 import com.dictionaryapp.service.WordService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -36,15 +35,6 @@ public class HomeController {
         }
 
         return "home";
-    }
-
-    @GetMapping("/home")
-    public String home(Model model) {
-        if (!userSession.isUserLoggedIn()) {
-            return "redirect:/";
-        }
-
-
     }
 
 }

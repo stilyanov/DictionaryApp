@@ -27,6 +27,7 @@ public class WordAddDTO {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @PastOrPresent(message = "The input date must be in the past or present!")
+    @NotNull(message = "The input date must be in the past or present!")
     private LocalDate inputDate;
 
     @NotNull(message = "You must select a language!")

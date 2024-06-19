@@ -10,12 +10,14 @@
     <form class="mx-auto w-25 bg-blur"
           th:action="@{/login}"
           th:method="POST"
-            th:object="${loginData}">
+          th:object="${loginData}">
 
         <!--    Example: Render errors messages with fields.errors - you can make it differently. -->
         <!--    <div th:each="error: ${#fields.errors()}" th:text="${error}" class="text-danger">Error messages</div>-->
 
-        <div class="text-danger" th:if="${badCredentials}">Incorrect username or password!</div>
+        <div th:if="${loginError}" class="text-danger text-center mb-3">
+            <span th:text="${loginError}"></span>
+        </div>
 
         <div class="form-group">
             <div class="label-holder text-white d-flex justify-content-center">
@@ -25,8 +27,9 @@
                    class="form-control"
                    id="username"
                    name="username"
-                    th:field="*{username}"
-                    th:errorclass="is-invalid"/>
+                   th:field="*{username}"
+                   th:errorclass="'is-invalid alert-danger'"
+            />
             <div class="invalid-feedback text-danger"><span th:if="${#fields.hasErrors()}"
                                                             th:errorclass="error"
                                                             th:errors="*{username}"></span></div>
@@ -40,11 +43,8 @@
                    class="form-control"
                    id="password"
                    name="password"
-                    th:field="*{password}"
-                   th:errorclass="is-invalid"/>
-            <div class="invalid-feedback text-danger"><span th:if="${#fields.hasErrors()}"
-                                                            th:errorclass="error"
-                                                            th:errors="*{password}"></span></div>
+                   th:errorclass="'is-invalid alert-danger'"
+            />
         </div>
 
         <div class="button-holder d-flex justify-content-center">

@@ -5,7 +5,6 @@ import com.dictionaryapp.model.dto.UserLoginDTO;
 import com.dictionaryapp.model.dto.UserRegisterDTO;
 import com.dictionaryapp.model.entity.User;
 import com.dictionaryapp.repo.UserRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,33 +14,29 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final UserSession userSession;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, UserSession userSession) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserSession userSession) {
         this.userRepository = userRepository;
-        this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
         this.userSession = userSession;
     }
 
     public boolean register(UserRegisterDTO userRegisterDTO) {
-        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
+        Optional<User> isUsernameOrEmailTaken = userRepository
+                .findByUsernameOrEmail(userRegisterDTO.getUsername(), userRegisterDTO.getEmail());
+
+        if (isUsernameOrEmailTaken.isPresent()) {
             return false;
         }
 
-        boolean isUsernameOrEmailTaken = userRepository
-                .existsByUsernameOrEmail(userRegisterDTO.getUsername(), userRegisterDTO.getEmail());
+        User user = new User();
+        user.setUsername(userRegisterDTO.getUsername());
+        user.setEmail(userRegisterDTO.getEmail());
+        user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
-        if (isUsernameOrEmailTaken) {
-            return false;
-        }
-
-        User map = modelMapper.map(userRegisterDTO, User.class);
-        map.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
-
-        userRepository.save(map);
+        this.userRepository.save(user);
 
         return true;
     }
