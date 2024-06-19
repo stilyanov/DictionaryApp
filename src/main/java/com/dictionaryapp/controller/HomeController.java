@@ -70,6 +70,7 @@ public class HomeController {
         model.addAttribute("frenchData", french);
         model.addAttribute("italiansData", italians);
         model.addAttribute("spanishData", spanish);
+        model.addAttribute("totalWordsCount", wordService.findAllWordsCount());
 
         return "home";
     }

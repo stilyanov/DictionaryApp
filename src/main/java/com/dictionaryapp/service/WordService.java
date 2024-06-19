@@ -80,4 +80,18 @@ public class WordService {
 
         return result;
     }
+
+    public int findAllWordsCount() {
+        return this.wordRepository.findAll().size();
+    }
+
+    @Transactional
+    public void removeWord(long wordId) {
+        wordRepository.deleteById(wordId);
+    }
+
+    @Transactional
+    public void removeAllWords() {
+        this.wordRepository.deleteAll();
+    }
 }

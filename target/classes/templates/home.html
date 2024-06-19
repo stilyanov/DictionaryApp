@@ -21,7 +21,7 @@
                         <span>Example: <span th:text="${german.getExample()}">{example}</span></span>
                         <br>
                         <span>Added by: <span th:text="${@userSession.username()}">{username}</span> on <span th:text="${german.getInputDate()}">{inputDate}</span></span>
-                        <a class="ml-3 text-danger" href="/">Remove</a>
+                        <a class="ml-3 text-danger" th:href="@{/remove/{id} (id=${german.getId()})}">Remove</a>
                     </div>
             </div>
 
@@ -35,8 +35,8 @@
                         <br>
                         <span>Example: <span th:text="${spanish.getExample()}">{example}</span></span>
                         <br>
-                        <span>Added by: <span th:text="${spanish.}">{username}</span> on <span th:text="${spanish.getInputDate()}">{inputDate}</span></span>
-                        <a class="ml-3 text-danger" href="/">Remove</a>
+                        <span>Added by: <span th:text="${@userSession.username()}">{username}</span> on <span th:text="${spanish.getInputDate()}">{inputDate}</span></span>
+                        <a class="ml-3 text-danger" th:href="@{/remove/{id} (id=${spanish.getId()})}">Remove</a>
                     </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                         <span>Example: <span th:text="${french.getExample()}">{example}</span></span>
                         <br>
                         <span>Added by: <span th:text="${@userSession.username()}">{username}</span> on <span th:text="${french.getInputDate()}">{inputDate}</span></span>
-                        <a class="ml-3 text-danger" href="/">Remove</a>
+                        <a class="ml-3 text-danger" th:href="@{/remove/{id} (id=${french.getId()})}">Remove</a>
                     </div>
             </div>
 
@@ -68,11 +68,12 @@
                         <span>Example: <span th:text="${italian.getExample()}">{example}</span></span>
                         <br>
                         <span>Added by: <span th:text="${@userSession.username()}">{username}</span> on <span th:text="${italian.getInputDate()}">{inputDate}</span></span>
-                        <a class="ml-3 text-danger" href="/">Remove</a>
+                        <a class="ml-3 text-danger" th:href="@{/remove/{id} (id=${italian.getId()})}">Remove</a>
                     </div>
             </div>
         </div>
-        <a href="/home/remove-all" class="btn btn-danger">Remove all {allWordsCount} words</a>
+        <a th:href="@{/remove-all}" class="btn btn-danger">Remove all <th:block th:text="${totalWordsCount}"></th:block> words</a>
+
     </div>
 </main>
 <footer th:replace="~{fragments/commons::footer}"></footer>

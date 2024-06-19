@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -72,6 +73,24 @@ public class WordController {
 
         return "redirect:/home";
 
+    }
+
+    @GetMapping("/remove/{wordId}")
+    public String removeWord(@PathVariable long wordId) {
+        if (!userSession.isUserLoggedIn()) {
+            return "redirect:/";
+        }
+
+        wordService.removeWord(wordId);
+
+        return "redirect:/home";
+    }
+
+    @GetMapping("/remove-all")
+    public String removeAllWords() {
+        this.wordService.removeAllWords();
+
+        return "redirect:/home";
     }
 
 }
